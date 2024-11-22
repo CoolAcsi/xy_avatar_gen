@@ -113,6 +113,8 @@
 
 
 		let image = new Image();
+		image.setAttribute('crossorigin', 'anonymous');
+		image.crossOrigin = 'anonymous';
 		image.onload = () => {
 			console.info(bgImg + " loading...")
 			canvas.width = image.width;
@@ -277,6 +279,8 @@
 			link.click();
 
 			const img = document.createElement('img');
+			img.setAttribute('crossorigin', 'anonymous');
+			img.crossOrigin = 'anonymous';
 			img.src = canvas.toDataURL('image/png');
 			img.style.width = '100%'; // 确保图片适应屏幕宽度
 			img.style.height = 'auto';
