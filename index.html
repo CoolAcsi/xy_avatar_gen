@@ -46,6 +46,41 @@
 			font-weight: normal;
 			font-style: normal;
 		}
+
+		@font-face {
+			font-family: '禹卫书法云墨繁体';
+			src: url('font/禹卫书法云墨繁体.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: '演示镇魂行楷';
+			src: url('font/演示镇魂行楷.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'AA剑鸣手书';
+			src: url('font/AA剑鸣手书.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'AA狂派手书';
+			src: url('font/AA狂派手书.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'lyls';
+			src: url('font/lyls.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
 	</style>
 </head>
 
@@ -60,24 +95,54 @@
 			<!-- <br><br> -->
 			<label for="textInput">文字：</label>
 			<input type="text" id="textInput" maxlength="3" placeholder="在此输入文字">
-			<br><br>
+			<br>
 			<!-- <label for="fontSize">文字大小：</label>
 			<input type="number" id="fontSize" value="150" disabled min="10">
 			<br><br> -->
 			<label for="textColor">文字颜色：</label>
 			<input type="color" id="textColor" value="#ffffff">
-			<br><br>
+			<br>
 			<!-- <label for="fontGlobalAlpha">文字透明度：</label>
 			<input type="number" id="fontGlobalAlpha" maxlength="2" min="1" max="10" value="5">
 			<br><br> -->
 			<label for="textColor">背景：</label>
 			<select id="bg_select" name="bg_select" id="lang">
-				<option value="red">红色</option>
-				<option value="blue">蓝色</option>
-				<option value="green">绿色</option>
-				<option value="orange">橙色</option>
-				<option value="purple">紫色</option>
+				<option value="tm_red">天命红</option>
+				<option value="tm_blue">天命蓝</option>
+				<option value="tm_green">天命绿</option>
+				<option value="tm_orange">天命橙</option>
+				<option value="tm_purple">天命紫</option>
+				<option value="red">忘川红</option>
+				<option value="blue">忘川蓝</option>
+				<option value="green">忘川绿</option>
+				<option value="orange">忘川橙</option>
+				<option value="purple">忘川紫</option>
 			</select>
+
+			<br>
+			<label for="textColor">字体：</label>
+			<select id="font_select" name="bg_select" id="lang">
+				<option value="禹卫书法云墨繁体">禹卫书法云墨繁体</option>
+				<option value="演示镇魂行楷">镇魂行楷</option>
+				<option value="AA剑鸣手书">AA剑鸣手书</option>
+				<option value="AA狂派手书">AA狂派手书</option>
+			</select>
+			<br>
+
+			<label for="textColor">俱乐部水印：</label>
+			<select id="logo_select" name="bg_select" id="lang">
+				<option value="logo_white.jpg">天命白</option>
+				<option value="logo_red.jpg">天命红</option>
+				<option value="logo_black.png">天命黑</option>
+				<option value="logo_yellow.jpg">天命橙</option>
+				<option value="logo_wc_red.jpg">忘川红</option>
+				<option value="logo_wc_white.jpg">忘川白</option>
+				<option value="logo_wc_black.jpg">忘川黑</option>
+				<option value="logo_wc_yellow.jpg">忘川黄</option>
+			</select>
+			<br>
+			<label for="textColor">水印位置：</label>
+			<input type="number" id="logo_position" value="260" min="0" max="300">
 			<br><br>
 			<button id="saveButton">保存图片</button>
 		</div>
@@ -94,35 +159,40 @@
 		const textColorInput = document.getElementById('textColor');
 		const saveButton = document.getElementById('saveButton');
 		const bgSelect = document.getElementById('bg_select');
+		const fontSelect = document.getElementById('font_select');
+		const logoSelect = document.getElementById('logo_select');
+		const logoPositionInput = document.getElementById('logo_position');
+		var selectedFont = "禹卫书法云墨繁体";
 
+		// font.load().then(function (loadedFont) {
+		// 	document.fonts.add(loadedFont);
+		// 	// 现在字体已加载，可以在Canvas中使用
+		// 	// imageUploader.disabled = false
 
+		// }).catch(function (error) {
+		// 	console.error('Failed to load the font', error);
+		// });
 
-		const font = new FontFace('AlimamaDaoLiTi', 'url(font/AlimamaDaoLiTi.woff2)', {
-			style: 'normal',
-			weight: 'normal'
-		});
-
-		font.load().then(function (loadedFont) {
-			document.fonts.add(loadedFont);
-			// 现在字体已加载，可以在Canvas中使用
-			// imageUploader.disabled = false
-
-		}).catch(function (error) {
-			console.error('Failed to load the font', error);
-		});
-
-
-		let image = new Image();
-		image.setAttribute('crossorigin', 'anonymous');
-		image.crossOrigin = 'anonymous';
-		image.onload = () => {
-			console.info(bgImg + " loading...")
-			canvas.width = image.width;
-			canvas.height = image.height;
+		let logo = new Image();
+		logo.src = "./img/logo_white.jpg"
+		// logo.setAttribute('crossorigin', 'anonymous');
+		// logo.crossOrigin = 'anonymous';
+		logo.onload = () => {
+			// image.height = auto;
 			drawCanvas();
 		};
 
-		image.src = "./img/red.jpg"
+
+		let image = new Image();
+		// image.setAttribute('crossorigin', 'anonymous');
+		// image.crossOrigin = 'anonymous';
+		image.onload = () => {
+			canvas.width = 400;
+			canvas.height = 400;
+			drawCanvas();
+		};
+
+		image.src = "./img/tm_red.jpg"
 
 		let textPosition = {
 			x: 120,
@@ -137,37 +207,34 @@
 		// 加载图片
 		var bgImg = "./img/blue.jpg"
 		bgSelect.addEventListener('change', (event) => {
-			switch (event.target.value) {
-				case "red":
-					bgImg = "./img/red.jpg"
-					break
-				case "blue":
-					bgImg = "./img/blue.jpg"
-					break
-				case "purple":
-					bgImg = "./img/purple.jpg"
-					break
-				case "green":
-					bgImg = "./img/green.jpg"
-					break
-				case "orange":
-					bgImg = "./img/orange.jpg"
-					break
-			}
+		
+			bgImg = "./img/" + event.target.value + ".jpg"
 			// const file = event.target.files[0];
 			if (bgImg) {
 				// const reader = new FileReader("./img/orange.jpg");
 				// reader.onload = (e) => {
-
 				image.src = bgImg
 				// };
 			}
 		});
 
+
+		fontSelect.addEventListener('change', (event) => {
+			selectedFont = event.target.value
+			drawCanvas();
+		});
+
+
+		logoSelect.addEventListener('change', (event) => {
+			logo.src = "./img/" + event.target.value
+			drawCanvas();
+		});
+
 		// 绘制画布
 		function drawCanvas() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.drawImage(image, 0, 0);
+			ctx.drawImage(image, 0, 0, 400, 400);
+			ctx.drawImage(logo, logoPositionInput.value, 150, 60, 100);
 			drawText();
 		}
 
@@ -186,15 +253,16 @@
 				const textColor = hexToRGBA(textColorInput.value);
 				// ctx.globalAlpha =  // 设置透明度为50%
 
-				var fs  = 180
+				var fs = 180
 				if (text.length == 1) {
-					fs = 170
+					fs = 180
 				} else if (text.length == 2) {
 					fs = 120
 				} else {
 					fs = 85
 				}
-				ctx.font = `${fs}px 'AlimamaDaoLiTi'`;
+				ctx.font = `${fs}px ${selectedFont}`;
+
 				// ctx.font = `${fontSize}px 'AlimamaDaoLiTi'`;
 
 				// ctx.fillStyle = changeOpacity(textColor, globalAlphaNum / 10);
@@ -205,8 +273,8 @@
 				// for (let i = 0; i < text.length; i++) {
 				// 	ctx.fillText(text[i], textPosition.x + (i * fontSize)/1.4, textPosition.y);
 				// }
-				
-				ctx.fillText(text, 195, textPosition.y);
+
+				ctx.fillText(text, 200, 220);
 			}
 			const debouncedDrawText = debounce(fn, 300);
 
@@ -258,6 +326,8 @@
 		textInput.addEventListener('input', drawCanvas);
 		// fontSizeInput.addEventListener('input', drawCanvas);
 		textColorInput.addEventListener('input', drawCanvas);
+		
+		logoPositionInput.addEventListener('input', drawCanvas);
 		// fontGlobalAlpha.addEventListener('input', drawCanvas);
 
 		// fontGlobalAlpha.addEventListener('input', function () {
@@ -279,8 +349,8 @@
 			link.click();
 
 			const img = document.createElement('img');
-			img.setAttribute('crossorigin', 'anonymous');
-			img.crossOrigin = 'anonymous';
+			// img.setAttribute('crossorigin', 'anonymous');
+			// img.crossOrigin = 'anonymous';
 			img.src = canvas.toDataURL('image/png');
 			img.style.width = '100%'; // 确保图片适应屏幕宽度
 			img.style.height = 'auto';
