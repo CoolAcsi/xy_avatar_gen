@@ -41,13 +41,35 @@
 		}
 
 		@font-face {
-			font-family: 'AlimamaDaoLiTi';
-			src: url('font/AlimamaDaoLiTi.ttf') format('truetype');
+			font-family: '禹卫书法云墨繁体';
+			src: url('http://snebs07m7.hn-bkt.clouddn.com/front/%E7%A6%B9%E5%8D%AB%E4%B9%A6%E6%B3%95%E4%BA%91%E5%A2%A8%E7%B9%81%E4%BD%93.TTF') format('truetype');
 			font-weight: normal;
 			font-style: normal;
 		}
 
 		@font-face {
+			font-family: '演示镇魂行楷';
+			src: url('http://snebs07m7.hn-bkt.clouddn.com/front/%E6%BC%94%E7%A4%BA%E9%95%87%E9%AD%82%E8%A1%8C%E6%A5%B7.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'AA剑鸣手书';
+			src: url('http://snebs07m7.hn-bkt.clouddn.com/front/AA%E5%89%91%E9%B8%A3%E6%89%8B%E4%B9%A6.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'AA狂派手书';
+			src: url('http://snebs07m7.hn-bkt.clouddn.com/front/AA%E7%8B%82%E6%B4%BE%E6%89%8B%E4%B9%A6.TTF') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+
+		/* @font-face {
 			font-family: '禹卫书法云墨繁体';
 			src: url('font/禹卫书法云墨繁体.TTF') format('truetype');
 			font-weight: normal;
@@ -73,14 +95,7 @@
 			src: url('font/AA狂派手书.TTF') format('truetype');
 			font-weight: normal;
 			font-style: normal;
-		}
-
-		@font-face {
-			font-family: 'lyls';
-			src: url('font/lyls.TTF') format('truetype');
-			font-weight: normal;
-			font-style: normal;
-		}
+		} */
 	</style>
 </head>
 
@@ -91,7 +106,6 @@
 
 
 		<div class="console">
-			<!-- <input type="file" id="imageUploader" disabled accept="image/*"> -->
 			<!-- <br><br> -->
 			<label for="textInput">文字：</label>
 			<input type="text" id="textInput" maxlength="3" value="" placeholder="在此输入文字">
@@ -149,6 +163,9 @@
 			<br>
 			<label for="textColor">水印位置-竖向：</label>
 			<input type="number" id="logo_position_y" value="150">
+			<br>
+			<label for="textColor">贴纸：</label>
+			<input type="file" id="sticker_upoader" accept="image/*">
 			<br><br>
 			<button id="saveButton">保存图片</button>
 		</div>
@@ -158,7 +175,7 @@
 	<script>
 		const canvas = document.getElementById('canvas');
 		const ctx = canvas.getContext('2d');
-		const imageUploader = document.getElementById('imageUploader');
+		const imageUploader = document.getElementById('sticker_upoader');
 		const textInput = document.getElementById('textInput');
 		const isVerticalTextInput = document.getElementById('isVerticalText');
 		const fontScaleInput = document.getElementById('fontScale');
@@ -183,6 +200,7 @@
 
 		let logo = new Image();
 		let image = new Image();
+		let sticker = new Image();
 		logo.src = "./img/logo_white.jpg"
 		logo.setAttribute('crossorigin', 'anonymous');
 		logo.crossOrigin = 'anonymous';
@@ -197,6 +215,14 @@
 			canvas.width = 400;
 			canvas.height = 400;
 			drawCanvas();
+		};
+
+		var stickerW = 0
+		var stickerH = 0
+		sticker.onload = () => {
+			new Promise(resolve => setTimeout(resolve, 500)).then(() => {
+				drawCanvas();
+			});
 		};
 
 		image.src = "./img/tm_red.jpg"
@@ -237,11 +263,31 @@
 			drawCanvas();
 		});
 
+
+		// 加载图片
+		imageUploader.addEventListener('change', (event) => {
+			const file = event.target.files[0];
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					// sticker.onload = () => {
+					// 	drawCanvas();
+					// };
+					sticker.src = e.target.result;
+				};
+				reader.readAsDataURL(file);
+			}
+		});
+
 		// 绘制画布
 		function drawCanvas() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.drawImage(image, 0, 0, 400, 400);
 			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, 60, 100);
+			var stickerW = 130
+			var stickerH = sticker.height * stickerW / sticker.width
+			console.info(sticker.width, sticker.height)
+			ctx.drawImage(sticker, 135, 100, stickerW, stickerH);
 			drawText();
 		}
 
@@ -277,7 +323,7 @@
 				ctx.fillStyle = changeOpacity(textColor, 1);
 				ctx.textAlign = `center`
 
-				var y = 220 - ((text.length-1) * fs)/2
+				var y = 220 - ((text.length - 1) * fs) / 2
 				if (isVerticalTextInput.checked) {
 					// 按竖向逐行绘制
 					for (let i = 0; i < text.length; i++) {
