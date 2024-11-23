@@ -94,13 +94,16 @@
 			<!-- <input type="file" id="imageUploader" disabled accept="image/*"> -->
 			<!-- <br><br> -->
 			<label for="textInput">文字：</label>
-			<input type="text" id="textInput" maxlength="3" placeholder="在此输入文字">
+			<input type="text" id="textInput" maxlength="3" value="" placeholder="在此输入文字">
 			<br>
 			<label for="fontSize">文字比例（%）：</label>
 			<input type="number" id="fontScale" value="100">
 			<br>
 			<label for="textColor">文字颜色：</label>
 			<input type="color" id="textColor" value="#ffffff">
+			<br>
+			<label for="textColor">竖向文字：</label>
+			<input type="checkbox" id="isVerticalText">
 			<br>
 			<!-- <label for="fontGlobalAlpha">文字透明度：</label>
 			<input type="number" id="fontGlobalAlpha" maxlength="2" min="1" max="10" value="5">
@@ -157,6 +160,7 @@
 		const ctx = canvas.getContext('2d');
 		const imageUploader = document.getElementById('imageUploader');
 		const textInput = document.getElementById('textInput');
+		const isVerticalTextInput = document.getElementById('isVerticalText');
 		const fontScaleInput = document.getElementById('fontScale');
 		// const fontGlobalAlpha = document.getElementById('fontGlobalAlpha');
 		const textColorInput = document.getElementById('textColor');
@@ -178,18 +182,17 @@
 		// });
 
 		let logo = new Image();
+		let image = new Image();
 		logo.src = "./img/logo_white.jpg"
 		logo.setAttribute('crossorigin', 'anonymous');
 		logo.crossOrigin = 'anonymous';
+		image.setAttribute('crossorigin', 'anonymous');
+		image.crossOrigin = 'anonymous';
 		logo.onload = () => {
 			// image.height = auto;
 			drawCanvas();
 		};
 
-
-		let image = new Image();
-		image.setAttribute('crossorigin', 'anonymous');
-		image.crossOrigin = 'anonymous';
 		image.onload = () => {
 			canvas.width = 400;
 			canvas.height = 400;
@@ -211,7 +214,7 @@
 		// 加载图片
 		var bgImg = "./img/blue.jpg"
 		bgSelect.addEventListener('change', (event) => {
-		
+
 			bgImg = "./img/" + event.target.value + ".jpg"
 			// const file = event.target.files[0];
 			if (bgImg) {
@@ -274,12 +277,15 @@
 				ctx.fillStyle = changeOpacity(textColor, 1);
 				ctx.textAlign = `center`
 
-				// 按竖向逐行绘制
-				// for (let i = 0; i < text.length; i++) {
-				// 	ctx.fillText(text[i], textPosition.x + (i * fontSize)/1.4, textPosition.y);
-				// }
-
-				ctx.fillText(text, 200, 220);
+				var y = 220 - ((text.length-1) * fs)/2
+				if (isVerticalTextInput.checked) {
+					// 按竖向逐行绘制
+					for (let i = 0; i < text.length; i++) {
+						ctx.fillText(text[i], 200, y + (i * fs));
+					}
+				} else {
+					ctx.fillText(text, 200, 220);
+				}
 			}
 			const debouncedDrawText = debounce(fn, 300);
 
@@ -331,7 +337,8 @@
 		textInput.addEventListener('input', drawCanvas);
 		// fontSizeInput.addEventListener('input', drawCanvas);
 		textColorInput.addEventListener('input', drawCanvas);
-		
+		isVerticalTextInput.addEventListener('input', drawCanvas);
+
 		logoPositionXInput.addEventListener('input', drawCanvas);
 		logoPositionYInput.addEventListener('input', drawCanvas);
 		fontScaleInput.addEventListener('input', drawCanvas);
