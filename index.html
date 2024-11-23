@@ -96,9 +96,9 @@
 			<label for="textInput">文字：</label>
 			<input type="text" id="textInput" maxlength="3" placeholder="在此输入文字">
 			<br>
-			<!-- <label for="fontSize">文字大小：</label>
-			<input type="number" id="fontSize" value="150" disabled min="10">
-			<br><br> -->
+			<label for="fontSize">文字比例（%）：</label>
+			<input type="number" id="fontScale" value="100">
+			<br>
 			<label for="textColor">文字颜色：</label>
 			<input type="color" id="textColor" value="#ffffff">
 			<br>
@@ -141,8 +141,11 @@
 				<option value="logo_wc_yellow.jpg">忘川黄</option>
 			</select>
 			<br>
-			<label for="textColor">水印位置：</label>
-			<input type="number" id="logo_position" value="260" min="0" max="300">
+			<label for="textColor">水印位置-横向：</label>
+			<input type="number" id="logo_position_x" value="260">
+			<br>
+			<label for="textColor">水印位置-竖向：</label>
+			<input type="number" id="logo_position_y" value="150">
 			<br><br>
 			<button id="saveButton">保存图片</button>
 		</div>
@@ -154,14 +157,15 @@
 		const ctx = canvas.getContext('2d');
 		const imageUploader = document.getElementById('imageUploader');
 		const textInput = document.getElementById('textInput');
-		// const fontSizeInput = document.getElementById('fontSize');
+		const fontScaleInput = document.getElementById('fontScale');
 		// const fontGlobalAlpha = document.getElementById('fontGlobalAlpha');
 		const textColorInput = document.getElementById('textColor');
 		const saveButton = document.getElementById('saveButton');
 		const bgSelect = document.getElementById('bg_select');
 		const fontSelect = document.getElementById('font_select');
 		const logoSelect = document.getElementById('logo_select');
-		const logoPositionInput = document.getElementById('logo_position');
+		const logoPositionXInput = document.getElementById('logo_position_x');
+		const logoPositionYInput = document.getElementById('logo_position_y');
 		var selectedFont = "禹卫书法云墨繁体";
 
 		// font.load().then(function (loadedFont) {
@@ -234,7 +238,7 @@
 		function drawCanvas() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.drawImage(image, 0, 0, 400, 400);
-			ctx.drawImage(logo, logoPositionInput.value, 150, 60, 100);
+			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, 60, 100);
 			drawText();
 		}
 
@@ -261,6 +265,7 @@
 				} else {
 					fs = 85
 				}
+				fs = fs * fontScaleInput.value / 100
 				ctx.font = `${fs}px ${selectedFont}`;
 
 				// ctx.font = `${fontSize}px 'AlimamaDaoLiTi'`;
@@ -327,7 +332,9 @@
 		// fontSizeInput.addEventListener('input', drawCanvas);
 		textColorInput.addEventListener('input', drawCanvas);
 		
-		logoPositionInput.addEventListener('input', drawCanvas);
+		logoPositionXInput.addEventListener('input', drawCanvas);
+		logoPositionYInput.addEventListener('input', drawCanvas);
+		fontScaleInput.addEventListener('input', drawCanvas);
 		// fontGlobalAlpha.addEventListener('input', drawCanvas);
 
 		// fontGlobalAlpha.addEventListener('input', function () {
