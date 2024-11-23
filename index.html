@@ -175,8 +175,8 @@
 
 		let logo = new Image();
 		logo.src = "./img/logo_white.jpg"
-		// logo.setAttribute('crossorigin', 'anonymous');
-		// logo.crossOrigin = 'anonymous';
+		logo.setAttribute('crossorigin', 'anonymous');
+		logo.crossOrigin = 'anonymous';
 		logo.onload = () => {
 			// image.height = auto;
 			drawCanvas();
@@ -184,8 +184,8 @@
 
 
 		let image = new Image();
-		// image.setAttribute('crossorigin', 'anonymous');
-		// image.crossOrigin = 'anonymous';
+		image.setAttribute('crossorigin', 'anonymous');
+		image.crossOrigin = 'anonymous';
 		image.onload = () => {
 			canvas.width = 400;
 			canvas.height = 400;
@@ -349,8 +349,8 @@
 			link.click();
 
 			const img = document.createElement('img');
-			// img.setAttribute('crossorigin', 'anonymous');
-			// img.crossOrigin = 'anonymous';
+			img.setAttribute('crossorigin', 'anonymous');
+			img.crossOrigin = 'anonymous';
 			img.src = canvas.toDataURL('image/png');
 			img.style.width = '100%'; // 确保图片适应屏幕宽度
 			img.style.height = 'auto';
