@@ -124,16 +124,21 @@
 			<br><br> -->
 			<label for="textColor">背景：</label>
 			<select id="bg_select" name="bg_select" id="lang">
-				<option value="tm_red">天命红</option>
-				<option value="tm_blue">天命蓝</option>
-				<option value="tm_green">天命绿</option>
-				<option value="tm_orange">天命橙</option>
-				<option value="tm_purple">天命紫</option>
+				<option value="wc_red_v2">忘川红2.0</option>
+				<option value="wc_blue_v2">忘川蓝2.0</option>
+				<option value="wc_green_v2">忘川绿2.0</option>
+				<option value="wc_orange_v2">忘川橙2.0</option>
+				<option value="wc_purple_v2">忘川紫2.0</option>
 				<option value="red">忘川红</option>
 				<option value="blue">忘川蓝</option>
 				<option value="green">忘川绿</option>
 				<option value="orange">忘川橙</option>
 				<option value="purple">忘川紫</option>
+				<option value="tm_red">天命红</option>
+				<option value="tm_blue">天命蓝</option>
+				<option value="tm_green">天命绿</option>
+				<option value="tm_orange">天命橙</option>
+				<option value="tm_purple">天命紫</option>
 			</select>
 
 			<br>
@@ -148,14 +153,14 @@
 
 			<label for="textColor">俱乐部水印：</label>
 			<select id="logo_select" name="bg_select" id="lang">
-				<option value="logo_white.jpg">天命白</option>
-				<option value="logo_red.jpg">天命红</option>
-				<option value="logo_black.png">天命黑</option>
-				<option value="logo_yellow.png">天命黄</option>
 				<option value="logo_wc_red.jpg">忘川红</option>
 				<option value="logo_wc_white.jpg">忘川白</option>
 				<option value="logo_wc_black.jpg">忘川黑</option>
 				<option value="logo_wc_yellow.jpg">忘川黄</option>
+				<option value="logo_white.jpg">天命白</option>
+				<option value="logo_red.jpg">天命红</option>
+				<option value="logo_black.png">天命黑</option>
+				<option value="logo_yellow.png">天命黄</option>
 			</select>
 			<br>
 			<label for="textColor">水印位置-横向：</label>
@@ -201,7 +206,7 @@
 		let logo = new Image();
 		let image = new Image();
 		let sticker = new Image();
-		logo.src = "./img/logo_white.jpg"
+		logo.src = "./img/logo_wc_white.jpg"
 		logo.setAttribute('crossorigin', 'anonymous');
 		logo.crossOrigin = 'anonymous';
 		image.setAttribute('crossorigin', 'anonymous');
@@ -225,7 +230,7 @@
 			});
 		};
 
-		image.src = "./img/tm_red.jpg"
+		image.src = "./img/wc_red_v2.jpg"
 
 		let textPosition = {
 			x: 120,
