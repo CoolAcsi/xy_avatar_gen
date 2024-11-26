@@ -28,7 +28,7 @@
 		canvas {
 			/* border: 1px solid black; */
 			touch-action: none;
-			padding: 1vw;
+			padding-top: 3vh;
 			/* 防止触摸滚动干扰拖拽 */
 		}
 
@@ -319,10 +319,10 @@
 		let image = new Image();
 		let sticker = new Image();
 
-		logo.setAttribute('crossorigin', 'anonymous');
-		logo.crossOrigin = 'anonymous';
-		image.setAttribute('crossorigin', 'anonymous');
-		image.crossOrigin = 'anonymous';
+		// logo.setAttribute('crossorigin', 'anonymous');
+		// logo.crossOrigin = 'anonymous';
+		// image.setAttribute('crossorigin', 'anonymous');
+		// image.crossOrigin = 'anonymous';
 		logo.onload = () => {
 			// image.height = auto;
 			drawCanvas();
