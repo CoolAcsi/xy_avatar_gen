@@ -140,7 +140,7 @@
 	<div class="container text-center">
 		<!-- <h1>头像生成器</h1> -->
 		<div class="row justify-content-md-center">
-			<div class="canvas col-md-auto"><canvas id="canvas"></canvas></div>
+			<div class="canvas col-md-auto" style="width: 100%;"><canvas id="canvas" style="width: 100%;"></canvas></div>
 			<form class="col-md-auto">
 				<br>
 				<button id="reset_team" class="btn btn-primary" onclick="resetTeam()"
@@ -318,10 +318,10 @@
 		let image = new Image();
 		let sticker = new Image();
 
-		// logo.setAttribute('crossorigin', 'anonymous');
-		// logo.crossOrigin = 'anonymous';
-		// image.setAttribute('crossorigin', 'anonymous');
-		// image.crossOrigin = 'anonymous';
+		logo.setAttribute('crossorigin', 'anonymous');
+		logo.crossOrigin = 'anonymous';
+		image.setAttribute('crossorigin', 'anonymous');
+		image.crossOrigin = 'anonymous';
 		logo.onload = () => {
 			// image.height = auto;
 			drawCanvas();
