@@ -241,7 +241,7 @@
 				logoSelect.value = "logo_red.jpg"
 				logo.src = "./img/logo_white.jpg"
 				image.src = "./img/tm_red.jpg"
-			} else {
+			} else if (event.target.value == "wc") {
 				Array.prototype.forEach.call(wcOpts, function (opt) {
 					opt.style.display = "inline"
 				});
@@ -252,6 +252,13 @@
 				logoSelect.value = "logo_wc_red.jpg"
 				logo.src = "./img/logo_wc_white.jpg"
 				image.src = "./img/wc_red_v2.jpg"
+			} else {
+				Array.prototype.forEach.call(wcOpts, function (opt) {
+					opt.style.display = "inline"
+				});
+				Array.prototype.forEach.call(tmOpts, function (opt) {
+					opt.style.display = "inline"
+				});
 			}
 			teamSelectPopup.style.visibility = "hidden"
 		});
