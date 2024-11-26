@@ -129,7 +129,7 @@
 
 
 	<div id="team_select_popup"
-		style="z-index: 9999; width: 100%; height: 100vh; background-color: gray; opacity: 0.7; position: fixed; text-align: center; line-height: 40vh;">
+		style="z-index: 9999; width: 100%; height: 100vh; background-color: gray; opacity: 0.9; position: fixed; text-align: center; line-height: 40vh;">
 		<label for="textColor"> </label>
 		<select id="team_select" class="form-select form-select-lg" name="team_select" style="font-size: large;">
 			<option value="no">选择你的俱乐部</option>
@@ -140,7 +140,7 @@
 	<div class="container text-center">
 		<!-- <h1>头像生成器</h1> -->
 		<div class="row justify-content-md-center">
-			<div class="canvas col-md-auto" style="width: 100%;"><canvas id="canvas" style="width: 100%;"></canvas></div>
+			<div class="canvas col-md-auto"><canvas id="canvas" style="width: 100%;"></canvas></div>
 			<form class="col-md-auto">
 				<br>
 				<button id="reset_team" class="btn btn-primary" onclick="resetTeam()"
@@ -167,8 +167,8 @@
 				</div>
 				<br>
 
-				<input type="checkbox" class="btn btn-outline-secondary" id="isVerticalText" autocomplete="off">
-				<label class="btn btn-outline-primary" for="isVerticalText" style="width: 100%;">竖向展示昵称</label>
+				<input type="checkbox" class="btn-check" id="isVerticalText" autocomplete="off">
+				<label class="btn btn-outline-danger" for="isVerticalText" style="width: 100%;">竖向展示昵称</label>
 
 				<br><br>
 				<!-- <label for="fontGlobalAlpha">文字透明度：</label>
@@ -239,6 +239,7 @@
 				</div>
 				<br>
 				<button class="btn btn-success" id="saveButton" style="width: 100%;">保存图片</button>
+				<br><br>
 			</form>
 		</div>
 	</div>
