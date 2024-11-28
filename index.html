@@ -231,7 +231,7 @@
 
 
 				<div class="input-group">
-					<span class="input-group-text">挂件</span>
+					<span class="input-group-text">挂饰</span>
 					<select id="pendant_select" class="form-select" name="pendant_select" id="lang">
 						<option value="streamer">飘带</option>
 						<option value="cloud">云</option>
@@ -454,13 +454,15 @@
 		function drawCanvas() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.drawImage(image, 0, 0, 400, 400);
-			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, 60, 100);
 
 			if (pendantStruct.Show) {
 				console.info(pendantStruct.X, pendantStruct.Y, pendantStruct.Width)
 				var pendantHeight = pendantStruct.Width * pendant.height / pendant.width
 				ctx.drawImage(pendant, pendantStruct.X, pendantStruct.Y, pendantStruct.Width, pendantHeight);
 			}
+
+			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, 60, 100);
+			
 			var stickerW = 130
 			var stickerH = sticker.height * stickerW / sticker.width
 			ctx.drawImage(sticker, 135, 130, stickerW, stickerH);
