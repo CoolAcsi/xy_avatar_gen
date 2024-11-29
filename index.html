@@ -361,6 +361,7 @@
 		pendantStruct.X = 42
 		pendantStruct.Y = 98
 		pendantStruct.Show = true
+		pendantStruct.GlobalAlpha = 1
 
 
 		logo.setAttribute('crossorigin', 'anonymous');
@@ -441,18 +442,21 @@
 					pendantStruct.X = 59
 					pendantStruct.Y = 52
 					pendantStruct.show = true
+					pendant.GlobalAlpha = 0.8
 					break
 				case "streamer":
 					pendantStruct.Width = 318
 					pendantStruct.X = 42
 					pendantStruct.Y = 98
 					pendantStruct.Show = true
+					pendant.GlobalAlpha = 0.8
 					break
 				case "smoke":
 					pendantStruct.Width = 292
 					pendantStruct.X = 52
 					pendantStruct.Y = 58
 					pendantStruct.Show = true
+					pendant.GlobalAlpha = 0.1
 					break
 				default:
 					pendantStruct.Show = false
@@ -487,9 +491,12 @@
 			ctx.drawImage(image, 0, 0, 400, 400);
 
 			if (pendantStruct.Show) {
+				// ctx.fillStyle = "rgba(255, 255, 255," + pendantStruct.GlobalAlpha + ")";
+				// ctx.GlobalAlpha = pendantStruct.GlobalAlpha
 				console.info(pendantStruct.X, pendantStruct.Y, pendantStruct.Width)
 				var pendantHeight = pendantStruct.Width * pendant.height / pendant.width
 				ctx.drawImage(pendant, pendantStruct.X, pendantStruct.Y, pendantStruct.Width, pendantHeight);
+				// ctx.fillStyle = "rgba(255, 255, 255, 1)";
 			}
 
 			var logoW = teamSelect.value == "qjy" ? 120:60
