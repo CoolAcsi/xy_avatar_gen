@@ -133,8 +133,9 @@
 		<label for="textColor"> </label>
 		<select id="team_select" class="form-select form-select-lg" name="team_select" style="font-size: large;">
 			<option value="no">选择你的俱乐部</option>
-			<option value="wc">忘川</option>
+			<option value="qjy">千江月</option>
 			<option value="tm">天命</option>
+			<option value="wc">忘川</option>
 		</select>
 	</div>
 	<div class="container text-center">
@@ -188,6 +189,7 @@
 						<option class="tm_opt" value="tm_green_v3">天命绿</option>
 						<option class="tm_opt" value="tm_orange_v3">天命橙</option>
 						<option class="tm_opt" value="tm_purple_v3">天命紫</option>
+						<option class="qjy_opt" value="qjy_default">千江月默认</option>
 					</select>
 					<!-- <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff"> -->
 				</div>
@@ -214,6 +216,7 @@
 						<option class="tm_opt" value="logo_red.jpg">天命红</option>
 						<option class="tm_opt" value="logo_black.png">天命黑</option>
 						<option class="tm_opt" value="logo_yellow.png">天命黄</option>
+						<option class="qjy_opt" value="qjy_default.jpg">千江月默认</option>
 						<!-- <option class="none" value="none">无</option> -->
 					</select>
 				</div>
@@ -272,6 +275,7 @@
 		const teamSelectPopup = document.getElementById('team_select_popup');
 		const tmOpts = document.getElementsByClassName('tm_opt');
 		const wcOpts = document.getElementsByClassName('wc_opt');
+		const qjyOpts = document.getElementsByClassName('qjy_opt');
 
 		var selectedFont = "禹卫书法云墨繁体";
 
@@ -297,6 +301,9 @@
 				Array.prototype.forEach.call(tmOpts, function (opt) {
 					opt.style.display = "inline"
 				});
+				Array.prototype.forEach.call(qjyOpts, function (opt) {
+					opt.style.display = "none"
+				});
 				bgSelect.value = "tm_red_v3"
 				logoSelect.value = "logo_white.jpg"
 				logo.src = "./img/logo_white.jpg"
@@ -308,15 +315,35 @@
 				Array.prototype.forEach.call(tmOpts, function (opt) {
 					opt.style.display = "none"
 				});
+				Array.prototype.forEach.call(qjyOpts, function (opt) {
+					opt.style.display = "none"
+				});
 				bgSelect.value = "wc_red_v3"
 				logoSelect.value = "logo_wc_white.jpg"
 				logo.src = "./img/logo_wc_white.jpg"
 				image.src = "./img/wc_red_v3.jpg"
+			} else if (event.target.value == "qjy") {
+				Array.prototype.forEach.call(qjyOpts, function (opt) {
+					opt.style.display = "inline"
+				});
+				Array.prototype.forEach.call(tmOpts, function (opt) {
+					opt.style.display = "none"
+				});
+				Array.prototype.forEach.call(wcOpts, function (opt) {
+					opt.style.display = "none"
+				});
+				bgSelect.value = "qjy_default"
+				logoSelect.value = "logo_qjy_default.jpg"
+				logo.src = "./img/logo_qjy_default.jpg"
+				image.src = "./img/qjy_default.jpg"
 			} else {
 				Array.prototype.forEach.call(wcOpts, function (opt) {
 					opt.style.display = "inline"
 				});
 				Array.prototype.forEach.call(tmOpts, function (opt) {
+					opt.style.display = "inline"
+				});
+				Array.prototype.forEach.call(qjyOpts, function (opt) {
 					opt.style.display = "inline"
 				});
 			}
@@ -343,6 +370,9 @@
 		logo.onload = () => {
 			// image.height = auto;
 			drawCanvas();
+			// new Promise(resolve => setTimeout(resolve, 500)).then(() => {
+			// 	drawCanvas();
+			// });
 		};
 
 		image.onload = () => {
@@ -365,7 +395,8 @@
 			});
 		};
 
-		image.src = "./img/wc_red_v3.jpg"
+		image.src = "./img/qjy_default.jpg"
+		// logo.src = ""
 
 		let textPosition = {
 			x: 120,
@@ -429,7 +460,7 @@
 			}
 			if (event.target.value != "none") {
 				pendant.src = "./img/" + event.target.value + ".jpg"
-			} else{
+			} else {
 				pendant.src = "./img/streamer.jpg"
 			}
 		});
@@ -461,8 +492,11 @@
 				ctx.drawImage(pendant, pendantStruct.X, pendantStruct.Y, pendantStruct.Width, pendantHeight);
 			}
 
-			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, 60, 100);
-			
+			var logoW = teamSelect.value == "qjy" ? 120:60
+			var logoH = logo.height * logoW / logo.width
+
+			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, logoW, logoH);
+
 			var stickerW = 130
 			var stickerH = sticker.height * stickerW / sticker.width
 			ctx.drawImage(sticker, 135, 130, stickerW, stickerH);
@@ -501,6 +535,24 @@
 				ctx.fillStyle = changeOpacity(textColor, 1);
 				ctx.textAlign = `center`
 
+				// ctx.shadowColor = 'rgba(255,255,255,1)';
+				// ctx.shadowBlur = 10;
+				// ctx.shadowOffsetX = 10200;
+				// ctx.shadowOffsetY = 10130;
+
+				// ctx.beginPath();
+				// ctx.fillStyle = 'rgba(255,255,255,1.0)';
+				// ctx.arc(-10000, -10000, 50, 0, Math.PI * 2);
+				// ctx.fill();
+
+				// ctx.shadowColor = 'rgba(222,222,222,1)';
+				// ctx.shadowBlur = 7;
+
+				// ctx.beginPath();
+				// ctx.fillStyle = 'rgba(0,0,255,1.0)';
+				// ctx.arc(-10000, -10000, 30, 0, Math.PI * 2);
+				// ctx.fill();
+
 				var y = 220 - ((text.length - 1) * fs) / 2
 				if (isVerticalTextInput.checked) {
 					// 按竖向逐行绘制
@@ -509,7 +561,9 @@
 					}
 				} else {
 					ctx.fillText(text, 200, 220);
+					ctx.fill();
 				}
+				// ctx.shadowBlur = 0;
 			}
 			const debouncedDrawText = debounce(fn, 300);
 
