@@ -133,9 +133,9 @@
 		<label for="textColor"> </label>
 		<select id="team_select" class="form-select form-select-lg" name="team_select" style="font-size: large;">
 			<option value="no">选择你的俱乐部</option>
-			<option value="qjy">千江月</option>
-			<option value="tm">天命</option>
+			<!-- <option value="qjy">千江月</option> -->
 			<option value="wc">忘川</option>
+			<option value="tm">天命</option>
 		</select>
 	</div>
 	<div class="container text-center">
@@ -239,6 +239,7 @@
 						<option value="streamer">飘带</option>
 						<option value="cloud">云</option>
 						<option value="smoke">烟</option>
+						<option value="bubble">泡泡</option>
 						<option value="none">无</option>
 					</select>
 				</div>
@@ -396,7 +397,7 @@
 			});
 		};
 
-		image.src = "./img/qjy_default.jpg"
+		image.src = "./img/tm_red_v3.jpg"
 		// logo.src = ""
 
 		let textPosition = {
@@ -457,6 +458,13 @@
 					pendantStruct.Y = 58
 					pendantStruct.Show = true
 					pendant.GlobalAlpha = 0.1
+					break
+				case "bubble":
+					pendantStruct.Width = 310
+					pendantStruct.X = 47
+					pendantStruct.Y = 47
+					pendantStruct.Show = true
+					pendant.GlobalAlpha = 0.8
 					break
 				default:
 					pendantStruct.Show = false
