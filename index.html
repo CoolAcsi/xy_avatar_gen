@@ -134,8 +134,9 @@
 		<select id="team_select" class="form-select form-select-lg" name="team_select" style="font-size: large;">
 			<option value="no">选择你的俱乐部</option>
 			<!-- <option value="qjy">千江月</option> -->
-			<option value="wc">忘川</option>
+			<option value="wc">千江月</option>
 			<option value="tm">天命</option>
+			<option value="bf">北伐</option>
 		</select>
 	</div>
 	<div class="container text-center">
@@ -190,6 +191,10 @@
 						<option class="tm_opt" value="tm_orange_v3">天命橙</option>
 						<option class="tm_opt" value="tm_purple_v3">天命紫</option>
 						<option class="qjy_opt" value="qjy_default">千江月默认</option>
+						<option class="bf_opt" value="bf_1">北伐1</option>
+						<option class="bf_opt" value="bf_2">北伐2</option>
+						<option class="bf_opt" value="bf_3">北伐3</option>
+						<option class="bf_opt" value="bf_4">北伐4</option>
 					</select>
 					<!-- <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff"> -->
 				</div>
@@ -277,6 +282,7 @@
 		const tmOpts = document.getElementsByClassName('tm_opt');
 		const wcOpts = document.getElementsByClassName('wc_opt');
 		const qjyOpts = document.getElementsByClassName('qjy_opt');
+		const bfOpts = document.getElementsByClassName('bf_opt');
 
 		var selectedFont = "禹卫书法云墨繁体";
 
@@ -305,6 +311,9 @@
 				Array.prototype.forEach.call(qjyOpts, function (opt) {
 					opt.style.display = "none"
 				});
+				Array.prototype.forEach.call(bfOpts, function (opt) {
+					opt.style.display = "none"
+				});
 				bgSelect.value = "tm_red_v3"
 				logoSelect.value = "logo_white.jpg"
 				logo.src = "./img/logo_white.jpg"
@@ -317,6 +326,9 @@
 					opt.style.display = "none"
 				});
 				Array.prototype.forEach.call(qjyOpts, function (opt) {
+					opt.style.display = "none"
+				});
+				Array.prototype.forEach.call(bfOpts, function (opt) {
 					opt.style.display = "none"
 				});
 				bgSelect.value = "wc_red_v3"
@@ -333,10 +345,30 @@
 				Array.prototype.forEach.call(wcOpts, function (opt) {
 					opt.style.display = "none"
 				});
+				Array.prototype.forEach.call(bfOpts, function (opt) {
+					opt.style.display = "none"
+				});
 				bgSelect.value = "qjy_default"
 				logoSelect.value = "logo_qjy_default.jpg"
 				logo.src = "./img/logo_qjy_default.jpg"
 				image.src = "./img/qjy_default.jpg"
+			} else if (event.target.value == "bf") {
+				Array.prototype.forEach.call(bfOpts, function (opt) {
+					opt.style.display = "inline"
+				});
+				Array.prototype.forEach.call(qjyOpts, function (opt) {
+					opt.style.display = "none"
+				});
+				Array.prototype.forEach.call(tmOpts, function (opt) {
+					opt.style.display = "none"
+				});
+				Array.prototype.forEach.call(wcOpts, function (opt) {
+					opt.style.display = "none"
+				});
+				bgSelect.value = "bf_1"
+				logoSelect.value = "none"
+				logo.src = "./img/default.jpg"
+				image.src = "./img/bf_1.jpg"
 			} else {
 				Array.prototype.forEach.call(wcOpts, function (opt) {
 					opt.style.display = "inline"
@@ -345,6 +377,9 @@
 					opt.style.display = "inline"
 				});
 				Array.prototype.forEach.call(qjyOpts, function (opt) {
+					opt.style.display = "inline"
+				});
+				Array.prototype.forEach.call(bfOpts, function (opt) {
 					opt.style.display = "inline"
 				});
 			}
@@ -510,7 +545,9 @@
 			var logoW = teamSelect.value == "qjy" ? 120:60
 			var logoH = logo.height * logoW / logo.width
 
-			ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, logoW, logoH);
+			if (teamSelect.value != "bf") {
+				ctx.drawImage(logo, logoPositionXInput.value, logoPositionYInput.value, logoW, logoH);
+			}
 
 			var stickerW = 130
 			var stickerH = sticker.height * stickerW / sticker.width
