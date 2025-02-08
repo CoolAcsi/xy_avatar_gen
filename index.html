@@ -137,6 +137,7 @@
 			<option value="wc">千江月</option>
 			<option value="tm">天命</option>
 			<option value="bf">北伐</option>
+			<option value="blt">碧落天</option>
 		</select>
 	</div>
 	<div class="container text-center">
@@ -180,20 +181,25 @@
 				<div class="input-group">
 					<span class="input-group-text">背景</span>
 					<select id="bg_select" class="form-select" class="form-select" name="bg_select" id="lang">
-						<option class="wc_opt" value="wc_red_v3">忘川红</option>
-						<option class="wc_opt" value="wc_blue_v3">忘川蓝</option>
-						<option class="wc_opt" value="wc_green_v3">忘川绿</option>
-						<option class="wc_opt" value="wc_orange_v3">忘川橙</option>
-						<option class="wc_opt" value="wc_purple_v3">忘川紫</option>
-						<option class="tm_opt" value="tm_red_v3">天命红</option>
-						<option class="tm_opt" value="tm_blue_v3">天命蓝</option>
-						<option class="tm_opt" value="tm_green_v3">天命绿</option>
-						<option class="tm_opt" value="tm_orange_v3">天命橙</option>
-						<option class="tm_opt" value="tm_purple_v3">天命紫</option>
-						<option class="qjy_opt" value="qjy_default">千江月默认</option>
-						<option class="bf_opt" value="bf_v2_1">北伐1</option>
-						<option class="bf_opt" value="bf_v2_2">北伐2</option>
-						<option class="bf_opt" value="bf_v2_3">北伐3</option>
+						<option class="wc_opt opt" value="wc_red_v3">忘川红</option>
+						<option class="wc_opt opt" value="wc_blue_v3">忘川蓝</option>
+						<option class="wc_opt opt" value="wc_green_v3">忘川绿</option>
+						<option class="wc_opt opt" value="wc_orange_v3">忘川橙</option>
+						<option class="wc_opt opt" value="wc_purple_v3">忘川紫</option>
+						<option class="tm_opt opt" value="tm_red_v3">天命红</option>
+						<option class="tm_opt opt" value="tm_blue_v3">天命蓝</option>
+						<option class="tm_opt opt" value="tm_green_v3">天命绿</option>
+						<option class="tm_opt opt" value="tm_orange_v3">天命橙</option>
+						<option class="tm_opt opt" value="tm_purple_v3">天命紫</option>
+						<option class="qjy_op opt" value="qjy_default">千江月默认</option>
+						<option class="bf_opt opt" value="bf_v2_1">北伐1</option>
+						<option class="bf_opt opt" value="bf_v2_2">北伐2</option>
+						<option class="bf_opt opt" value="bf_v2_3">北伐3</option>
+						<option class="blt_opt opt" value="blt_red">碧落红</option>
+						<option class="blt_opt opt" value="blt_blue">碧落蓝</option>
+						<option class="blt_opt opt" value="blt_green">碧落绿</option>
+						<option class="blt_opt opt" value="blt_orange">碧落橙</option>
+						<option class="blt_opt opt" value="blt_purple">碧落紫</option>
 						<!-- <option class="bf_opt" value="bf_4">北伐4</option> -->
 					</select>
 					<!-- <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff"> -->
@@ -213,15 +219,17 @@
 				<div class="input-group">
 					<span class="input-group-text">俱乐部水印</span>
 					<select id="logo_select" class="form-select" name="logo_select" id="lang">
-						<option class="wc_opt" value="logo_wc_white.jpg">忘川白</option>
-						<option class="wc_opt" value="logo_wc_red.jpg">忘川红</option>
-						<option class="wc_opt" value="logo_wc_black.jpg">忘川黑</option>
-						<option class="wc_opt" value="logo_wc_yellow.jpg">忘川黄</option>
-						<option class="tm_opt" value="logo_white.jpg">天命白</option>
-						<option class="tm_opt" value="logo_red.jpg">天命红</option>
-						<option class="tm_opt" value="logo_black.png">天命黑</option>
-						<option class="tm_opt" value="logo_yellow.png">天命黄</option>
-						<option class="qjy_opt" value="logo_qjy_default.jpg">千江月默认</option>
+						<option class="wc_opt opt" value="logo_wc_white.jpg">忘川白</option>
+						<option class="wc_opt opt" value="logo_wc_red.jpg">忘川红</option>
+						<option class="wc_opt opt" value="logo_wc_black.jpg">忘川黑</option>
+						<option class="wc_opt opt" value="logo_wc_yellow.jpg">忘川黄</option>
+						<option class="tm_opt opt" value="logo_white.jpg">天命白</option>
+						<option class="tm_opt opt" value="logo_red.jpg">天命红</option>
+						<option class="tm_opt opt" value="logo_black.png">天命黑</option>
+						<option class="tm_opt opt" value="logo_yellow.png">天命黄</option>
+						<option class="qjy_opt opt" value="logo_qjy_default.jpg">千江月默认</option>
+						<option class="blt_opt opt" value="logo_blt_white.jpg">碧落白</option>
+						<!-- <option class="blt_opt opt" value="logo_blt_black.jpg">碧落黑</option> -->
 						<!-- <option class="none" value="none">无</option> -->
 					</select>
 				</div>
@@ -283,6 +291,8 @@
 		const wcOpts = document.getElementsByClassName('wc_opt');
 		const qjyOpts = document.getElementsByClassName('qjy_opt');
 		const bfOpts = document.getElementsByClassName('bf_opt');
+		const bltOpts = document.getElementsByClassName('blt_opt');
+		const allOpts = document.getElementsByClassName('opt');
 
 		var selectedFont = "禹卫书法云墨繁体";
 
@@ -301,18 +311,12 @@
 
 
 		teamSelect.addEventListener('change', (event) => {
-			if (event.target.value == "tm") {
-				Array.prototype.forEach.call(wcOpts, function (opt) {
+			Array.prototype.forEach.call(allOpts, function (opt) {
 					opt.style.display = "none"
 				});
+			if (event.target.value == "tm") {
 				Array.prototype.forEach.call(tmOpts, function (opt) {
 					opt.style.display = "inline"
-				});
-				Array.prototype.forEach.call(qjyOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(bfOpts, function (opt) {
-					opt.style.display = "none"
 				});
 				bgSelect.value = "tm_red_v3"
 				logoSelect.value = "logo_white.jpg"
@@ -322,31 +326,13 @@
 				Array.prototype.forEach.call(wcOpts, function (opt) {
 					opt.style.display = "inline"
 				});
-				Array.prototype.forEach.call(tmOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(qjyOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(bfOpts, function (opt) {
-					opt.style.display = "none"
-				});
 				bgSelect.value = "wc_red_v3"
-				logoSelect.value = "logo_wc_white.jpg"
-				logo.src = "./img/logo_wc_white.jpg"
+				logoSelect.value = "logo_qjy_default.jpg"
+				logo.src = "./img/logo_qjy_default.jpg"
 				image.src = "./img/wc_red_v3.jpg"
 			} else if (event.target.value == "qjy") {
 				Array.prototype.forEach.call(qjyOpts, function (opt) {
 					opt.style.display = "inline"
-				});
-				Array.prototype.forEach.call(tmOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(wcOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(bfOpts, function (opt) {
-					opt.style.display = "none"
 				});
 				bgSelect.value = "qjy_default"
 				logoSelect.value = "logo_qjy_default.jpg"
@@ -356,19 +342,18 @@
 				Array.prototype.forEach.call(bfOpts, function (opt) {
 					opt.style.display = "inline"
 				});
-				Array.prototype.forEach.call(qjyOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(tmOpts, function (opt) {
-					opt.style.display = "none"
-				});
-				Array.prototype.forEach.call(wcOpts, function (opt) {
-					opt.style.display = "none"
-				});
 				bgSelect.value = "bf_v2_1"
 				logoSelect.value = "none"
 				logo.src = "./img/default.jpg"
 				image.src = "./img/bf_v2_1.jpg"
+			} else if (event.target.value == "blt") {
+				Array.prototype.forEach.call(bltOpts, function (opt) {
+					opt.style.display = "inline"
+				});
+				bgSelect.value = "blt_red"
+				logoSelect.value = "logo_blt_white.jpg"
+				logo.src = "./img/logo_blt_white.jpg"
+				image.src = "./img/blt_red.jpg"
 			} else {
 				Array.prototype.forEach.call(wcOpts, function (opt) {
 					opt.style.display = "inline"
@@ -542,7 +527,7 @@
 				// ctx.fillStyle = "rgba(255, 255, 255, 1)";
 			}
 
-			var logoW = teamSelect.value == "qjy" ? 120:60
+			var logoW = teamSelect.value == "wc" ? 120:60
 			var logoH = logo.height * logoW / logo.width
 
 			if (teamSelect.value != "bf") {
