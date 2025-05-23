@@ -597,14 +597,14 @@
 				// ctx.arc(-10000, -10000, 30, 0, Math.PI * 2);
 				// ctx.fill();
 
-				var y = 220 - ((text.length - 1) * fs) / 2
+				var y = 220 - ((text.length - 1) * fs) / 2 + Number(namePositionYInput.value)
 				if (isVerticalTextInput.checked) {
 					// 按竖向逐行绘制
 					for (let i = 0; i < text.length; i++) {
 						ctx.fillText(text[i], 200, y + (i * fs));
 					}
 				} else {
-					ctx.fillText(text, 200, 220 + namePositionYInput.value);
+					ctx.fillText(text, 200, 220 + Number(namePositionYInput.value));
 					ctx.fill();
 				}
 				// ctx.shadowBlur = 0;
